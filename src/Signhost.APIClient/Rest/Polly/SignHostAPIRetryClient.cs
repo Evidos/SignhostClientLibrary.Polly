@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
@@ -29,7 +30,7 @@ namespace Signhost.APIClient.Rest.Polly
 		/// <param name="policy">An <see cref="AsyncPolicy"/> to use instead of the default.</param>
 		public SignHostApiRetryClient(
 			ISignHostApiClientSettings settings,
-			AsyncPolicy policy = null)
+			AsyncPolicy? policy = null)
 			: this(settings, new HttpClient(), policy)
 		{
 		}
@@ -45,7 +46,7 @@ namespace Signhost.APIClient.Rest.Polly
 		public SignHostApiRetryClient(
 			ISignHostApiClientSettings settings,
 			HttpClient httpClient,
-			AsyncPolicy policy = null)
+			AsyncPolicy? policy = null)
 		{
 			client = new SignHostApiClient(settings, httpClient);
 
@@ -188,7 +189,7 @@ namespace Signhost.APIClient.Rest.Polly
 		/// <inheritdoc />
 		public async Task DeleteTransactionAsync(
 			string transactionId,
-			DeleteTransactionOptions options = null,
+			DeleteTransactionOptions? options = null,
 			CancellationToken cancellationToken = default)
 		{
 			await retryPolicy
