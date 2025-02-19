@@ -47,7 +47,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Polly" Version="7.1.1" />
-    <PackageReference Include="EntrustSignhostClientLibrary" Version="4.1.51-preview" />
+    <PackageReference Include="EntrustSignhostClientLibrary" Version="4.1.55-preview" />
   </ItemGroup>
 
   <ItemGroup>
