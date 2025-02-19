@@ -22,6 +22,7 @@
     <PackageTags>sign;signing;digital signature;pdf</PackageTags>
     <PackageReleaseNotes>
       * 1.0.0 - Initial release
+      * 2.0.0 - Bump SignhostClientLibrary
       * 3.0.0 - Bump to SignhostClientLibrary v3 major version
     </PackageReleaseNotes>
     <Company>Entrust</Company>
