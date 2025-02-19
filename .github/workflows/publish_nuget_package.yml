@@ -54,18 +54,18 @@ jobs:
 
       - name: Pack NuGet package
         run: dotnet pack "src/Signhost.APIClient/Signhost.APIClient.csproj" --configuration Release /p:Version=${{ env.LATEST_VERSION }} /p:IncludeReadmeFile=true
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/v4-prerelease'
 
       - name: Upload NuGet Package
         uses: actions/upload-artifact@v4
         with:
           name: Nuget
           path: '**/*.nupkg'
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/v4-prerelease'
 
       - name: Publish NuGet package to NuGet.org
         run: |
           dotnet nuget push '**/*.nupkg' --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
         env:
           POLLY_TEST: ${{ secrets.NUGET_KEY }}
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/v4-prerelease'
