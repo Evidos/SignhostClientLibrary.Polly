@@ -13,7 +13,7 @@ Get it on NuGet:
 For detailed examples, visit: [https://github.com/Evidos/SignhostClientLibrary/blob/master/README.md](https://github.com/Evidos/SignhostClientLibrary/blob/master/README.md)
 
 ```c#
-var settings = new SignHostApiClientSettings("YourAppKey");
+var settings = new SignHostApiClientSettings("YourAppKey", "apikey or usertoken");
 
 var retryClient = new SignHostApiRetryClient(settings);
 
