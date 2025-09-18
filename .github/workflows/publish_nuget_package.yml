@@ -8,9 +8,6 @@ on:
     branches:
       - '*'
 
-env:
-  SH_VERSION_SUFFIX: 'preview'
-
 jobs:
   build:
     runs-on: windows-latest
@@ -20,18 +17,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Fetch version
+      - name: Check for Tag on Current Commit
         run: |
           # Fetch all tags from the remote repository
           git fetch https://github.com/Evidos/SignhostClientLibrary.Polly.git --tags
-          # Get the most recent tag based on the commit date
-          LATEST_TAG=$(git tag --sort=-creatordate | head -n 1)
-          # If the tag contains a "v", remove it to get the version (if needed)
-          VERSION=${LATEST_TAG#v}
-          # Set the version as an environment variable for subsequent steps
-          echo "LATEST_VERSION=${VERSION}" >> $GITHUB_ENV
-          # Print the version for debugging
-          echo "Version ${VERSION}"
+
+          # Check if the current commit has a tag
+          CURRENT_TAG=$(git tag --points-at HEAD | head -n 1)
+
+          if [ -z "$CURRENT_TAG" ]; then
+            echo "No tag found on current commit. Skipping release steps."
+            echo "HAS_TAG=false" >> $GITHUB_ENV
+          else
+            echo "Tag found on current commit: $CURRENT_TAG"
+            # If the tag contains a "v", remove it to get the version (if needed)
+            VERSION=${CURRENT_TAG#v}
+            echo "HAS_TAG=true" >> $GITHUB_ENV
+            echo "LATEST_VERSION=${VERSION}" >> $GITHUB_ENV
+            echo "Version ${VERSION}"
+          fi
+
         shell: bash
 
       - name: Setup .NET
@@ -54,18 +59,18 @@ jobs:
 
       - name: Pack NuGet package
         run: dotnet pack "src/Signhost.APIClient/Signhost.APIClient.csproj" --configuration Release /p:Version=${{ env.LATEST_VERSION }} /p:IncludeReadmeFile=true
-        if: github.ref == 'refs/heads/master'
+        if: env.HAS_TAG == 'true' && github.ref == 'refs/heads/master'
 
       - name: Upload NuGet Package
         uses: actions/upload-artifact@v4
         with:
           name: Nuget
           path: '**/*.nupkg'
-        if: github.ref == 'refs/heads/master'
+        if: env.HAS_TAG == 'true' && github.ref == 'refs/heads/master'
 
       - name: Publish NuGet package to NuGet.org
         run: |
           dotnet nuget push '**/*.nupkg' --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
         env:
           POLLY_TEST: ${{ secrets.NUGET_KEY }}
-        if: github.ref == 'refs/heads/master'
+        if: env.HAS_TAG == 'true' && github.ref == 'refs/heads/master'
