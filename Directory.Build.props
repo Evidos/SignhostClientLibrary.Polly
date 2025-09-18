@@ -2,6 +2,7 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)build/signhost.ruleset</CodeAnalysisRuleSet>
+	<Nullable>warnings</Nullable>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
