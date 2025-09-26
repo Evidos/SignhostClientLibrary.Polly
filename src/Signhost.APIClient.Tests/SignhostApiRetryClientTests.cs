@@ -346,7 +346,7 @@ namespace SignhostAPIRetryClient.Tests
 		/// Tests if the api call fails as expected the fourth time around.
 		/// So the retry policy is used and a exception is thrown.
 		/// </summary>
-		[Fact(Skip = "Current method of the base library hasn't implemented SignhostRestApiClientException yet.")]
+		[Fact]
 		public void When_All_Calls_Fails_GetDocumentAsync_Should_Throw_Exception()
 		{
 			Func<Task> apiCall = () =>
@@ -360,7 +360,7 @@ namespace SignhostAPIRetryClient.Tests
 		/// Tests if the api call fails as expected the fourth time around.
 		/// So the retry policy is used and a exception is thrown.
 		/// </summary>
-		[Fact(Skip = "Current method of the base library hasn't implemented SignhostRestApiClientException yet.")]
+		[Fact]
 		public void When_All_Calls_Fail_GetReceiptAsync_Should_Throw_Exception()
 		{
 			Func<Task> apiCall = () =>
