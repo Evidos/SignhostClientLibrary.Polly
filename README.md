@@ -8,6 +8,9 @@ Get it on NuGet:
 
 `PM> Install-Package EntrustSignhostClientLibrary.Polly`
 
+### Documentation
+For full API documentation, please visit [evidos.github.io](https://evidos.github.io).
+
 ### Example code
 
 For detailed examples, visit: [https://github.com/Evidos/SignhostClientLibrary/blob/master/README.md](https://github.com/Evidos/SignhostClientLibrary/blob/master/README.md)
