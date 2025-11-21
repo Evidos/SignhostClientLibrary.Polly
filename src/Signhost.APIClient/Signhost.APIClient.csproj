@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup Label="Build">
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.0;net462</TargetFrameworks>
+		<LangVersion>10</LangVersion>
 		<RootNamespace>Signhost.APIClient</RootNamespace>
 	</PropertyGroup>
 
