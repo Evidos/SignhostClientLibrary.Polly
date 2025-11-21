@@ -11,44 +11,44 @@ using Signhost.APIClient.Rest.ErrorHandling;
 namespace Signhost.APIClient.Rest.Polly
 {
 	/// <summary>
-	/// Implements the <see cref="ISignHostApiClient"/> interface which provides
+	/// Implements the <see cref="ISignhostApiClient"/> interface which provides
 	/// a signhost api client implementation.
 	/// </summary>
-	public class SignHostApiRetryClient
-		: ISignHostApiClient
+	public class SignhostApiRetryClient
+		: ISignhostApiClient
 		, IDisposable
 	{
-		private readonly SignHostApiClient client;
+		private readonly SignhostApiClient client;
 		private readonly AsyncPolicy retryPolicy;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="SignHostApiRetryClient"/> class.
+		/// Initializes a new instance of the <see cref="SignhostApiRetryClient"/> class.
 		/// This client has a built-in retry mechanism.
-		/// Set your usertoken and APPKey by creating a <see cref="SignHostApiClientSettings"/>.
+		/// Set your usertoken and APPKey by creating a <see cref="SignhostApiClientSettings"/>.
 		/// </summary>
-		/// <param name="settings"><see cref="SignHostApiClientSettings"/>.</param>
+		/// <param name="settings"><see cref="SignhostApiClientSettings"/>.</param>
 		/// <param name="policy">An <see cref="AsyncPolicy"/> to use instead of the default.</param>
-		public SignHostApiRetryClient(
-			ISignHostApiClientSettings settings,
+		public SignhostApiRetryClient(
+			ISignhostApiClientSettings settings,
 			AsyncPolicy? policy = null)
 			: this(settings, new HttpClient(), policy)
 		{
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="SignHostApiRetryClient"/> class.
+		/// Initializes a new instance of the <see cref="SignhostApiRetryClient"/> class.
 		/// This client has a built-in retry mechanism.
-		/// Set your usertoken and APPKey by creating a <see cref="SignHostApiClientSettings"/>.
+		/// Set your usertoken and APPKey by creating a <see cref="SignhostApiClientSettings"/>.
 		/// </summary>
-		/// <param name="settings"><see cref="SignHostApiClientSettings"/>.</param>
+		/// <param name="settings"><see cref="SignhostApiClientSettings"/>.</param>
 		/// <param name="httpClient"><see cref="HttpClient"/> to use for all http calls.</param>
 		/// <param name="policy">An <see cref="AsyncPolicy"/> to use instead of the default.</param>
-		public SignHostApiRetryClient(
-			ISignHostApiClientSettings settings,
+		public SignhostApiRetryClient(
+			ISignhostApiClientSettings settings,
 			HttpClient httpClient,
 			AsyncPolicy? policy = null)
 		{
-			client = new SignHostApiClient(settings, httpClient);
+			client = new SignhostApiClient(settings, httpClient);
 
 			if (policy is null) {
 				retryPolicy = GetDefaultPolicy();
