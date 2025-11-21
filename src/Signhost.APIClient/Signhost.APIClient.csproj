@@ -10,8 +10,6 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
-		<VersionBuildNumber Condition="'$(APPVEYOR_BUILD_NUMBER)' != ''">$(APPVEYOR_BUILD_NUMBER)</VersionBuildNumber>
-		<VersionBuildNumber Condition="'$(VersionBuildNumber)' == ''">0</VersionBuildNumber>
 		<VersionPrefix>4.0.$(VersionBuildNumber)</VersionPrefix>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>Entrust</Authors>
