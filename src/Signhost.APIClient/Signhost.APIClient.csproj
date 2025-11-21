@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup Label="Build">
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.0;net462</TargetFrameworks>
+		<LangVersion>10</LangVersion>
 		<RootNamespace>Signhost.APIClient</RootNamespace>
 	</PropertyGroup>
 
@@ -9,9 +10,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
-		<VersionBuildNumber Condition="'$(APPVEYOR_BUILD_NUMBER)' != ''">$(APPVEYOR_BUILD_NUMBER)</VersionBuildNumber>
-		<VersionBuildNumber Condition="'$(VersionBuildNumber)' == ''">0</VersionBuildNumber>
-		<VersionPrefix>4.0.$(VersionBuildNumber)</VersionPrefix>
+		<VersionPrefix>5.0.$(VersionBuildNumber)</VersionPrefix>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>Entrust</Authors>
 		<Product>Signhost</Product>
@@ -24,7 +23,7 @@
 		<Description>A .NET library for the signhost.com api, with a built-in retry mechanism.</Description>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-		<AssemblyVersion>4.0.0.0</AssemblyVersion>
+		<AssemblyVersion>5.0.0.0</AssemblyVersion>
 		<FileVersion>$(VersionPrefix)</FileVersion>
 		<InformationalVersion>$(VersionPrefix) $(VersionSufix)</InformationalVersion>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -44,6 +43,6 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Polly" Version="8.6.4" />
-		<PackageReference Include="EntrustSignhostClientLibrary" Version="4.2.1" />
+		<PackageReference Include="EntrustSignhostClientLibrary" Version="5.0.0" />
 	</ItemGroup>
 </Project>
