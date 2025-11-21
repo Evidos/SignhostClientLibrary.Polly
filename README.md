@@ -16,8 +16,7 @@ For full API documentation, please visit [evidos.github.io](https://evidos.githu
 For detailed examples, visit: [https://github.com/Evidos/SignhostClientLibrary/blob/master/README.md](https://github.com/Evidos/SignhostClientLibrary/blob/master/README.md)
 
 ```c#
-var settings = new SignHostApiClientSettings("YourAppKey", "apikey or usertoken");
+var settings = new SignhostApiClientSettings("YourAppKey", "apikey or usertoken");
 
-var retryClient = new SignHostApiRetryClient(settings);
-
+var retryClient = new SignhostApiRetryClient(settings);
 ```

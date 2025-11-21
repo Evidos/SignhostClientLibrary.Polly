@@ -17,16 +17,16 @@ using Xunit;
 namespace SignhostAPIRetryClient.Tests
 {
 	/// <summary>
-	/// Tests the SignHostApiRetryClient.
+	/// Tests the SignhostApiRetryClient.
 	/// </summary>
 	public class SignhostApiRetryClientTests
 		: IDisposable
 	{
-		private readonly SignHostApiClientSettings settings;
+		private readonly SignhostApiClientSettings settings;
 
-		private readonly SignHostApiRetryClient firstCallSucceedsClient;
-		private readonly SignHostApiRetryClient thirdCallSucceedsClient;
-		private readonly SignHostApiRetryClient allCallsFailClient;
+		private readonly SignhostApiRetryClient firstCallSucceedsClient;
+		private readonly SignhostApiRetryClient thirdCallSucceedsClient;
+		private readonly SignhostApiRetryClient allCallsFailClient;
 
 		private readonly MemoryStream documentFile;
 
@@ -36,12 +36,12 @@ namespace SignhostAPIRetryClient.Tests
 		/// </summary>
 		public SignhostApiRetryClientTests()
 		{
-			settings = new SignHostApiClientSettings(
+			settings = new SignhostApiClientSettings(
 				"AppKey") {
 				Endpoint = "http://localhost/api/",
 			};
 
-			firstCallSucceedsClient = new SignHostApiRetryClient(
+			firstCallSucceedsClient = new SignhostApiRetryClient(
 				settings,
 				new HttpClient(
 					SetupMockedHandler(
@@ -50,7 +50,7 @@ namespace SignhostAPIRetryClient.Tests
 						HttpStatusCode.InternalServerError,
 						HttpStatusCode.InternalServerError)));
 
-			thirdCallSucceedsClient = new SignHostApiRetryClient(
+			thirdCallSucceedsClient = new SignhostApiRetryClient(
 				settings,
 				new HttpClient(
 					SetupMockedHandler(
@@ -59,7 +59,7 @@ namespace SignhostAPIRetryClient.Tests
 						HttpStatusCode.OK,
 						HttpStatusCode.InternalServerError)));
 
-			allCallsFailClient = new SignHostApiRetryClient(
+			allCallsFailClient = new SignhostApiRetryClient(
 				settings,
 				new HttpClient(
 					SetupMockedHandler(
