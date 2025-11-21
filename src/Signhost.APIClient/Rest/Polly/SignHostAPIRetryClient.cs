@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
@@ -59,132 +58,66 @@ public class SignhostApiRetryClient
 	}
 
 	/// <inheritdoc />
-	public async Task AddOrReplaceFileMetaToTransactionAsync(
-		FileMeta fileMeta,
-		string transactionId,
-		string fileId)
-		=> await AddOrReplaceFileMetaToTransactionAsync(
-			fileMeta,
-			transactionId,
-			fileId,
-			default);
-
-	/// <inheritdoc />
-	public async Task AddOrReplaceFileMetaToTransactionAsync(
-		FileMeta fileMeta,
-		string transactionId,
-		string fileId,
-		CancellationToken cancellationToken = default)
-	{
-		await retryPolicy
-			.ExecuteAsync(
-				ct => client.AddOrReplaceFileMetaToTransactionAsync(
-					fileMeta,
-					transactionId,
-					fileId,
-					ct),
-				cancellationToken);
-	}
-
-	/// <inheritdoc />
-	public async Task AddOrReplaceFileToTransactionAsync(
-		Stream fileStream,
-		string transactionId,
-		string fileId,
-		FileUploadOptions uploadOptions)
-		=> await AddOrReplaceFileToTransactionAsync(
-			fileStream,
-			transactionId,
-			fileId,
-			uploadOptions,
-			default);
-
-	/// <inheritdoc />
-	public async Task AddOrReplaceFileToTransactionAsync(
-		Stream fileStream,
-		string transactionId,
-		string fileId,
-		FileUploadOptions uploadOptions,
-		CancellationToken cancellationToken = default)
-	{
-		await retryPolicy
-			.ExecuteAsync(
-				ct => client.AddOrReplaceFileToTransactionAsync(
-					fileStream,
-					transactionId,
-					fileId,
-					uploadOptions,
-					ct),
-				cancellationToken);
-	}
-
-	/// <inheritdoc />
-	public async Task AddOrReplaceFileToTransactionAsync(
-		string filePath,
-		string transactionId,
-		string fileId,
-		FileUploadOptions uploadOptions)
-		=> await AddOrReplaceFileToTransactionAsync(
-			filePath,
-			transactionId,
-			fileId,
-			uploadOptions,
-			default);
-
-	/// <inheritdoc />
-	public async Task AddOrReplaceFileToTransactionAsync(
-		string filePath,
-		string transactionId,
-		string fileId,
-		FileUploadOptions uploadOptions,
-		CancellationToken cancellationToken = default)
-	{
-		await retryPolicy
-			.ExecuteAsync(
-				ct => client.AddOrReplaceFileToTransactionAsync(
-					filePath,
-					transactionId,
-					fileId,
-					uploadOptions,
-					ct),
-				cancellationToken);
-	}
-
-	/// <inheritdoc />
 	public async Task<Transaction> CreateTransactionAsync(
-		Transaction transaction)
-		=> await CreateTransactionAsync(transaction, default);
-
-	/// <inheritdoc />
-	public async Task<Transaction> CreateTransactionAsync(
-		Transaction transaction,
+		CreateTransactionRequest request,
 		CancellationToken cancellationToken = default)
 	{
-		return await retryPolicy
-			.ExecuteAsync(
-				ct => client.CreateTransactionAsync(
-					transaction,
-					ct),
-				cancellationToken);
-	}
-
-	/// <inheritdoc />
-	public async Task DeleteTransactionAsync(
-		string transactionId,
-		CancellationToken cancellationToken = default)
-		=> await DeleteTransactionAsync(
-			transactionId,
-			default,
+		return await retryPolicy.ExecuteAsync(
+			ct => client.CreateTransactionAsync(request, ct),
 			cancellationToken);
+	}
 
 	/// <inheritdoc />
-	public async Task DeleteTransactionAsync(
+	public async Task AddOrReplaceFileMetaToTransactionAsync(
+		FileMeta fileMeta,
 		string transactionId,
-		DeleteTransactionOptions options)
-		=> await DeleteTransactionAsync(
-			transactionId,
-			options,
-			default);
+		string fileId,
+		CancellationToken cancellationToken = default)
+	{
+		await retryPolicy.ExecuteAsync(
+			ct => client.AddOrReplaceFileMetaToTransactionAsync(
+				fileMeta,
+				transactionId,
+				fileId,
+				ct),
+			cancellationToken);
+	}
+
+	/// <inheritdoc />
+	public async Task AddOrReplaceFileToTransactionAsync(
+		Stream fileStream,
+		string transactionId,
+		string fileId,
+		FileUploadOptions? uploadOptions,
+		CancellationToken cancellationToken = default)
+	{
+		await retryPolicy.ExecuteAsync(
+			ct => client.AddOrReplaceFileToTransactionAsync(
+				fileStream,
+				transactionId,
+				fileId,
+				uploadOptions,
+				ct),
+			cancellationToken);
+	}
+
+	/// <inheritdoc />
+	public async Task AddOrReplaceFileToTransactionAsync(
+		string filePath,
+		string transactionId,
+		string fileId,
+		FileUploadOptions? uploadOptions,
+		CancellationToken cancellationToken = default)
+	{
+		await retryPolicy.ExecuteAsync(
+			ct => client.AddOrReplaceFileToTransactionAsync(
+				filePath,
+				transactionId,
+				fileId,
+				uploadOptions,
+				ct),
+			cancellationToken);
+	}
 
 	/// <inheritdoc />
 	public async Task DeleteTransactionAsync(
@@ -192,20 +125,10 @@ public class SignhostApiRetryClient
 		DeleteTransactionOptions? options = null,
 		CancellationToken cancellationToken = default)
 	{
-		await retryPolicy
-			.ExecuteAsync(
-				ct => client.DeleteTransactionAsync(
-					transactionId,
-					options,
-					ct),
-				cancellationToken);
+		await retryPolicy.ExecuteAsync(
+			ct => client.DeleteTransactionAsync(transactionId, options, ct),
+			cancellationToken);
 	}
-
-	/// <inheritdoc />
-	public async Task<Stream> GetDocumentAsync(
-		string transactionId,
-		string fileId)
-		=> await GetDocumentAsync(transactionId, fileId, default);
 
 	/// <inheritdoc />
 	public async Task<Stream> GetDocumentAsync(
@@ -213,83 +136,49 @@ public class SignhostApiRetryClient
 		string fileId,
 		CancellationToken cancellationToken = default)
 	{
-		return await retryPolicy
-			.ExecuteAsync(
-				ct => client.GetDocumentAsync(
-					transactionId,
-					fileId,
-					ct),
-				cancellationToken);
+		return await retryPolicy.ExecuteAsync(
+			ct => client.GetDocumentAsync(transactionId, fileId, ct),
+			cancellationToken);
 	}
-
-	/// <inheritdoc />
-	public async Task<Stream> GetReceiptAsync(string transactionId)
-		=> await GetReceiptAsync(transactionId, default);
 
 	/// <inheritdoc />
 	public async Task<Stream> GetReceiptAsync(
 		string transactionId,
 		CancellationToken cancellationToken = default)
 	{
-		return await retryPolicy
-			.ExecuteAsync(
-				ct => client.GetReceiptAsync(
-					transactionId,
-					ct),
-				cancellationToken);
+		return await retryPolicy.ExecuteAsync(
+			ct => client.GetReceiptAsync(transactionId, ct),
+			cancellationToken);
 	}
-
-	/// <inheritdoc />
-	public async Task<Transaction> GetTransactionAsync(string transactionId)
-		=> await GetTransactionAsync(transactionId, default);
 
 	/// <inheritdoc />
 	public async Task<Transaction> GetTransactionAsync(
 		string transactionId,
 		CancellationToken cancellationToken = default)
 	{
-		return await retryPolicy
-			.ExecuteAsync(
-				ct => client.GetTransactionAsync(
-					transactionId,
-					ct),
-				cancellationToken);
+		return await retryPolicy.ExecuteAsync(
+			ct => client.GetTransactionAsync(transactionId, ct),
+			cancellationToken);
 	}
-
-	/// <inheritdoc />
-	public async Task<ApiResponse<Transaction>> GetTransactionResponseAsync(
-		string transactionId)
-		=> await GetTransactionResponseAsync(transactionId, default);
 
 	/// <inheritdoc />
 	public async Task<ApiResponse<Transaction>> GetTransactionResponseAsync(
 		string transactionId,
 		CancellationToken cancellationToken = default)
 	{
-		return await retryPolicy
-			.ExecuteAsync(
-				ct => client.GetTransactionResponseAsync(
-					transactionId,
-					ct),
-				cancellationToken);
+		return await retryPolicy.ExecuteAsync(
+			ct => client.GetTransactionResponseAsync(transactionId, ct),
+			cancellationToken);
 	}
-
-	/// <inheritdoc />
-	public async Task StartTransactionAsync(
-		string transactionId)
-		=> await StartTransactionAsync(transactionId, default);
 
 	/// <inheritdoc />
 	public async Task StartTransactionAsync(
 		string transactionId,
 		CancellationToken cancellationToken = default)
 	{
-		await retryPolicy
-			.ExecuteAsync(
-				ct => client.StartTransactionAsync(
-					transactionId,
-					ct),
-				cancellationToken);
+		await retryPolicy.ExecuteAsync(
+			ct => client.StartTransactionAsync(transactionId, ct),
+			cancellationToken);
 	}
 
 	/// <inheritdoc/>
@@ -314,9 +203,9 @@ public class SignhostApiRetryClient
 	{
 		return Policy
 			.Handle<SignhostRestApiClientException>(ex =>
-				!(ex is BadAuthorizationException) &&
-				!(ex is BadRequestException) &&
-				!(ex is NotFoundException))
+				ex is not BadAuthorizationException &&
+				ex is not BadRequestException &&
+				ex is not NotFoundException)
 
 			// When an HttpClient times out it doesn't throw a TimeoutException like you'd expect.
 			// Instead it throws a TaskCanceledException, that's why we check the cancellation token.

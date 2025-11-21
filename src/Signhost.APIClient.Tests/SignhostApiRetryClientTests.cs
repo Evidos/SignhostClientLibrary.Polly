@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using System.IO;
 using System.Net;
@@ -109,8 +108,8 @@ public class SignhostApiRetryClientTests
 	[Fact]
 	public void When_First_Call_Succeeds_CreateTransactionAsync_Should_Not_Throw_Exception()
 	{
-		Func<Task> apiCall = () =>
-			firstCallSucceedsClient.CreateTransactionAsync(new Transaction());
+		Func<Task> apiCall = () => firstCallSucceedsClient
+			.CreateTransactionAsync(new CreateTransactionRequest());
 		apiCall.Should().NotThrowAsync<SignhostRestApiClientException>();
 	}
 
@@ -216,8 +215,8 @@ public class SignhostApiRetryClientTests
 	[Fact]
 	public void When_Third_Call_Succeeds_CreateTransactionAsync_Should_Not_Throw_Exception()
 	{
-		Func<Task> apiCall = () =>
-			thirdCallSucceedsClient.CreateTransactionAsync(new Transaction());
+		Func<Task> apiCall = () => thirdCallSucceedsClient
+			.CreateTransactionAsync(new CreateTransactionRequest());
 		apiCall.Should().NotThrowAsync<SignhostRestApiClientException>();
 	}
 
@@ -323,8 +322,8 @@ public class SignhostApiRetryClientTests
 	[Fact]
 	public void When_All_Calls_Fail_CreateTransactionAsync_Should_Throw_Exception()
 	{
-		Func<Task> apiCall = () =>
-			allCallsFailClient.CreateTransactionAsync(new Transaction());
+		Func<Task> apiCall = () => allCallsFailClient
+			.CreateTransactionAsync(new CreateTransactionRequest());
 		apiCall.Should().ThrowAsync<SignhostRestApiClientException>();
 	}
 

@@ -3,6 +3,7 @@
 		<TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.0;net462</TargetFrameworks>
 		<LangVersion>10</LangVersion>
 		<RootNamespace>Signhost.APIClient</RootNamespace>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -45,6 +46,6 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Polly" Version="8.6.5" />
-		<PackageReference Include="EntrustSignhostClientLibrary" Version="4.3.0" />
+		<PackageReference Include="EntrustSignhostClientLibrary" Version="5.0.0" />
 	</ItemGroup>
 </Project>
